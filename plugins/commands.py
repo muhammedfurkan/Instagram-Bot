@@ -37,115 +37,64 @@ HELP = Config.HELP
 
 @Client.on_message(filters.command("start") & filters.private)
 async def start(bot, cmd):
-	if str(cmd.from_user.id) != OWNER:
-		await cmd.reply_text(
-			HOME_TEXT.format(cmd.from_user.first_name,
-			                 cmd.from_user.id, USER, USER, USER, OWNER),
-			disable_web_page_preview=True,
-			reply_markup=InlineKeyboardMarkup(
-				[
-					[
-						InlineKeyboardButton("👨🏼‍💻Developer", url='https://t.me/By_Azade'),
-						InlineKeyboardButton("🤖Other Bots", url="https://t.me/KanalLinkleri")
-					],
+    if str(cmd.from_user.id) != OWNER:
+        await cmd.reply_text(
+            HOME_TEXT.format(cmd.from_user.first_name,
+                             cmd.from_user.id, USER, USER, USER, OWNER),
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            "👨🏼‍💻Developer", url='https://t.me/By_Azade'),
+                        InlineKeyboardButton(
+                            "🤖Other Bots", url="https://t.me/KanalLinkleri")
+                    ],
                     [
                         InlineKeyboardButton(
                             "🔗Source Code", url="https://github.com/Muhammedfurkan/Instagram-Bot"),
-						InlineKeyboardButton(
-						    "🧩Deploy Own Bot", url="https://heroku.com/deploy?template=https://github.com/muhammedfurkan/Instagram-Bot")
+                        InlineKeyboardButton(
+                            "🧩Deploy Own Bot", url="https://heroku.com/deploy?template=https://github.com/muhammedfurkan/Instagram-Bot")
                     ],
                     [
                         InlineKeyboardButton(
                             "👨🏼‍🦯How To Use?", callback_data="help#subin"),
-						InlineKeyboardButton("⚙️Update Channel",
-						                     url="https://t.me/KanalLinkleri")
+                        InlineKeyboardButton("⚙️Update Channel",
+                                             url="https://t.me/KanalLinkleri")
 
                     ]
 
-				]
-			)
-		)
-	else:
-		await cmd.reply_text(
-			HOME_TEXT_OWNER.format(cmd.from_user.first_name, cmd.from_user.id),
-			disable_web_page_preview=True,
-			reply_markup=InlineKeyboardMarkup(
-				[
-					[
-						InlineKeyboardButton("👨🏼‍💻Developer", url='https://t.me/By_Azade'),
-						InlineKeyboardButton("🤖Other Bots", url="https://t.me/KanalLinkleri")"),
-					],
-                    [
-                        InlineKeyboardButton(
-                            "🔗Source Code", url="https://github.com/muhammedfurkan/Instagram-Bot")
-                    ],
-                    [
-                        InlineKeyboardButton(
-                            "👨🏼‍🦯How To Use?", callback_data="help#subin"),
-						InlineKeyboardButton("⚙️Update Channel",
-						                     url="https://t.me/KanalLinkleri")
-
-                    ]
-
-				]
-			)
-		)
+                ]
+            )
+        )
+    else:
+        await cmd.reply_text(
+            HOME_TEXT_OWNER.format(cmd.from_user.first_name, cmd.from_user.id),
+            disable_web_page_preview=True
+        )
 
 
-@ Client.on_message(filters.command("help") & filters.private)
+@Client.on_message(filters.command("help") & filters.private)
 async def help(bot, cmd):
-	await cmd.reply_text(
-		HELP,
-		disable_web_page_preview = True,
-		reply_markup = InlineKeyboardMarkup(
-			[
-				[
-					InlineKeyboardButton("👨🏼‍💻Developer", url='https://t.me/By_Azade'),
-					InlineKeyboardButton("🤖Other Bots", url="https://t.me/KanalLinkleri")"),
-					InlineKeyboardButton("⚙️Update Channel", url="https://t.me/KanalLinkleri")
+    await cmd.reply_text(
+        HELP,
+        disable_web_page_preview=True
+    )
 
-				],
-				[
-					InlineKeyboardButton(
-					    "🔗Source Code", url="https://github.com/By_Azade/Instagram-Bot"),
-					InlineKeyboardButton(
-					    "🧩Deploy Own Bot", url="https://heroku.com/deploy?template=https://github.com/muhammedfurkan/Instagram-Bot")
-				]
-			]
-			)
-		)
 
-@ Client.on_message(filters.command("restart") & filters.private)
+@Client.on_message(filters.command("restart") & filters.private)
 async def stop(bot, cmd):
-	if str(cmd.from_user.id) != OWNER:
-		await cmd.reply_text(
-			HOME_TEXT.format(cmd.from_user.first_name,
-			                 cmd.from_user.id, USER, USER, USER, OWNER),
-			disable_web_page_preview=True,
-			reply_markup=InlineKeyboardMarkup(
-				[
-					[
-						InlineKeyboardButton("👨🏼‍💻Developer", url='https://t.me/By_Azade'),
-						InlineKeyboardButton("🤖Other Bots", url="https://t.me/KanalLinkleri")")
-					],
-                    [
-                        InlineKeyboardButton("🔗Source Code", url="https://github.com/By_Azade/Instagram-Bot"),
-						InlineKeyboardButton("🧩Deploy Own Bot", url="https://heroku.com/deploy?template=https://github.com/muhammedfurkan/Instagram-Bot")
-                    ],
-                    [
-                        InlineKeyboardButton("👨🏼‍🦯How To Use?", callback_data="help#subin"),
-						InlineKeyboardButton("⚙️Update Channel", url="https://t.me/KanalLinkleri")
-
-                    ]
-					
-				]
-			)
-		)
-		return
-	msg = await bot.send_message(
-		text="Restarting your bot..",
-		chat_id=cmd.from_user.id
-		)
-	await asyncio.sleep(2)
-	await msg.edit("All Processes Stopped and Restarted")
-	os.execl(sys.executable, sys.executable, *sys.argv)
+    if str(cmd.from_user.id) != OWNER:
+        await cmd.reply_text(
+            HOME_TEXT.format(cmd.from_user.first_name,
+                             cmd.from_user.id, USER, USER, USER, OWNER),
+            disable_web_page_preview=True
+        )
+        return
+    msg = await bot.send_message(
+        text="Restarting your bot..",
+        chat_id=cmd.from_user.id
+    )
+    await asyncio.sleep(2)
+    await msg.edit("All Processes Stopped and Restarted")
+    os.execl(sys.executable, sys.executable, *sys.argv)
