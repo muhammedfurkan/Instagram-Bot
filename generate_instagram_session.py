@@ -1,31 +1,32 @@
-#MIT License
+# MIT License
 
-#Copyright (c) 2021 subinps
+# Copyright (c) 2021 subinps
 
-#Permission is hereby granted, free of charge, to any person obtaining a copy
-#of this software and associated documentation files (the "Software"), to deal
-#in the Software without restriction, including without limitation the rights
-#to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-#copies of the Software, and to permit persons to whom the Software is
-#furnished to do so, subject to the following conditions:
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
 
-#The above copyright notice and this permission notice shall be included in all
-#copies or substantial portions of the Software.
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
 
-#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-#AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-#LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-#OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-#SOFTWARE.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 
-from pyrogram import Client
-from pyrogram.errors.exceptions.bad_request_400 import PeerIdInvalid
-from pyrogram.errors.exceptions.bad_request_400 import UserIsBlocked
 import asyncio
 import os
+
 from instaloader import Instaloader, TwoFactorAuthRequiredException
+from pyrogram import Client
+from pyrogram.errors.exceptions.bad_request_400 import (PeerIdInvalid,
+                                                        UserIsBlocked)
 
 L = Instaloader()
 
@@ -71,14 +72,12 @@ async def generate():
             chat_id=owner,
             document=f"./{id}",
             file_name=tg_id,
-            caption=
-            "⚠️ KEEP THIS SESSION FILE SAFE AND DO NOT SHARE WITH ANYBODY",
+            caption="⚠️ KEEP THIS SESSION FILE SAFE AND DO NOT SHARE WITH ANYBODY",
         )
         file_id = f.document.file_id
         await bot.send_message(
             chat_id=owner,
-            text=
-            f"Here is Your <code>INSTA_SESSIONFILE_ID</code>\n\n<code>{file_id}</code>\n\n\n⚠️ KEEP THIS SESSION FILE SAFE AND DO NOT SHARE WITH ANYBODY"
+            text=f"Here is Your <code>INSTA_SESSIONFILE_ID</code>\n\n<code>{file_id}</code>\n\n\n⚠️ KEEP THIS SESSION FILE SAFE AND DO NOT SHARE WITH ANYBODY",
         )
         print(
             "I have messaged you the INSTA_SESSIONFILE_ID. Check your telegram messages"
@@ -88,9 +87,7 @@ async def generate():
             "It seems you have not yet started the bot or Telegram ID given is invalid. Send /start to your bot first and try again"
         )
     except UserIsBlocked:
-        print(
-            "It seems you have BLOCKED the Bot. Unblock the bot and try again."
-        )
+        print("It seems you have BLOCKED the Bot. Unblock the bot and try again.")
     except Exception as e:
         print(e)
     await bot.stop()

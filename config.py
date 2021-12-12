@@ -1,16 +1,18 @@
 import os
 from instaloader import Instaloader
+
+
 class Config:
     API_ID = int(os.environ.get("API_ID", ""))
     API_HASH = os.environ.get("API_HASH", "")
-    BOT_TOKEN = os.environ.get("BOT_TOKEN", "") 
+    BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
     USER = os.environ.get("INSTAGRAM_USERNAME", "")
     OWNER = os.environ.get("OWNER_ID", "")
     INSTA_SESSIONFILE_ID = os.environ.get("INSTA_SESSIONFILE_ID", None)
     S = "0"
-    STATUS = set(int(x) for x in (S).split())
-    L=Instaloader()
-    HELP="""
+    STATUS = {int(x) for x in (S).split()}
+    L = Instaloader()
+    HELP = """
 You can Download almost anything From your Instagram Account.
 
 <b>What Can Be Downloaded?:</b>
@@ -110,4 +112,3 @@ I am your assistant to manage your Instagram account.
 
 Use /help to know what I can do for you.</b>
 """
-
