@@ -46,51 +46,56 @@ async def cb_handler(bot: Client, query: CallbackQuery):
     igtvcount = profile.igtvcount
     followers = profile.followers
     folllowing = profile.followees
-    
+
     if query.data.startswith("help"):
         await query.message.edit_text(
-            HELP,
-            reply_markup=InlineKeyboardMarkup(
-			[
-				[
-					InlineKeyboardButton("👨🏼‍💻Developer", url='https://t.me/subinps'),
-					InlineKeyboardButton("🤖Other Bots", url="https://t.me/subin_works/122"),
-                    InlineKeyboardButton("⚙️Update Channel", url="https://t.me/subin_works")
-				],
-				[
-					InlineKeyboardButton("🔗Source Code", url="https://github.com/subinps/Instagram-Bot"),
-					InlineKeyboardButton("🧩Deploy Own Bot", url="https://heroku.com/deploy?template=https://github.com/subinps/Instagram-Bot")
-				]
-			]
-			)
-		)
-    
-    
+        HELP,
+        reply_markup=InlineKeyboardMarkup(
+        	[
+        		[
+        			InlineKeyboardButton("👨🏼‍💻Developer", url='https://t.me/subinps'),
+        			InlineKeyboardButton("🤖Other Bots", url="https://t.me/subin_works/122"),
+        InlineKeyboardButton("⚙️Update Channel", url="https://t.me/subin_works")
+        		],
+        		[
+        			InlineKeyboardButton("🔗Source Code", url="https://github.com/subinps/Instagram-Bot"),
+        			InlineKeyboardButton("🧩Deploy Own Bot", url="https://heroku.com/deploy?template=https://github.com/subinps/Instagram-Bot")
+        		]
+        	]
+        	)
+        )
+
+
     elif query.data.startswith("ppic"):
         profile = Profile.from_username(insta.context, username)
         profilepichd = profile.profile_pic_url
         await query.answer()
         await bot.send_document(chat_id=query.from_user.id, document=profilepichd, file_name=f"{username}.jpg", force_document=True)
-    
-    
-   
+
+
+
     elif query.data.startswith("post"):
         await query.message.delete()
         await bot.send_message(
             query.from_user.id,
-            f"What type of post do you want to download?.",
+            'What type of post do you want to download?.',
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton("Photos", callback_data=f"photos#{username}"),
-                        InlineKeyboardButton("Videos", callback_data=f"video#{username}")
+                        InlineKeyboardButton(
+                            "Photos", callback_data=f"photos#{username}"
+                        ),
+                        InlineKeyboardButton(
+                            "Videos", callback_data=f"video#{username}"
+                        ),
                     ]
                 ]
-            )
+            ),
         )
-    
 
-    
+            
+
+            
 
     elif query.data.startswith("photo"):
         if mediacount==0:
@@ -114,7 +119,7 @@ async def cb_handler(bot: Client, query: CallbackQuery):
         await download_insta(command, m, dir)
         chat_id=query.from_user.id
         await upload(m, bot, chat_id, dir)
-    
+
 
 
     elif query.data.startswith("video"):
@@ -197,21 +202,20 @@ async def cb_handler(bot: Client, query: CallbackQuery):
             f = profile.get_followers()
             for p in f:
                 followers += f"\nName: {p.username} :     Link to Profile: www.instagram.com/{p.username}"
-            text_file = open(f"{username}'s followers.txt", "w")
-            text_file.write(followers)
-            text_file.close()
+            with open(f"{username}'s followers.txt", "w") as text_file:
+                text_file.write(followers)
             await bot.send_document(chat_id=chat_id, document=f"./{username}'s followers.txt", caption=f"{name}'s followers\n\nA Project By [XTZ_Bots](https://t.me/subin_works)")
             os.remove(f"./{username}'s followers.txt")
-    
 
 
 
-    
+
+
     elif query.data.startswith("followees"):
         await query.message.delete()
         chat_id=query.from_user.id
         m=await bot.send_message(chat_id, f"Fetching Followees of {name}")
-        
+
         f = profile.get_followees()
         followees=f"**Followees List for {name}**\n\n"
         for p in f:
@@ -224,9 +228,8 @@ async def cb_handler(bot: Client, query: CallbackQuery):
             f = profile.get_followees()
             for p in f:
                 followees += f"\nName: {p.username} :     Link to Profile: www.instagram.com/{p.username}"
-            text_file = open(f"{username}'s followees.txt", "w")
-            text_file.write(followees)
-            text_file.close()
+            with open(f"{username}'s followees.txt", "w") as text_file:
+                text_file.write(followees)
             await bot.send_document(chat_id=chat_id, document=f"./{username}'s followees.txt", caption=f"{name}'s followees\n\nA Project By [XTZ_Bots](https://t.me/subin_works)")
             os.remove(f"./{username}'s followees.txt")
 
@@ -236,7 +239,7 @@ async def cb_handler(bot: Client, query: CallbackQuery):
 
     elif query.data.startswith("no"):
         await query.message.delete()
-    
+
 
 
     else:
